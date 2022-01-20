@@ -37,10 +37,7 @@ const Home = ({ userObj }) => {
     setTweet("");
   };
   const onChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setTweet(value);
+    setTweet(event.target.value);
   };
   return (
     <div>
