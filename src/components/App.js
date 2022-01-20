@@ -27,7 +27,6 @@ function App() {
       ) : (
         "loading..."
       )}
-      <footer>&copy; minseok</footer>
     </>
   );
 }
