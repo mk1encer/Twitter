@@ -11,6 +11,7 @@ import {
 import Tweet from "../components/Tweet";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { v4 } from "uuid";
+import TweetFactory from "../components/TweetFactory";
 
 const Home = ({ userObj }) => {
   const [tweet, setTweet] = useState("");
@@ -29,51 +30,51 @@ const Home = ({ userObj }) => {
     });
   }, []);
 
-  const onSubmit = async (event) => {
-    event.preventDefault();
-    let attachmentUrl = "";
-    if (attachment !== "") {
-      const fileRef = ref(storage, `${userObj.uid}/${v4()}`);
-      const uploadFile = await uploadString(fileRef, attachment, "data_url");
-      console.log(uploadFile);
-      attachmentUrl = await getDownloadURL(uploadFile.ref);
-      console.log(attachmentUrl);
-    }
-    const tweetPosting = {
-      text: tweet,
-      createdAt: Date.now(),
-      creatorId: userObj.uid,
-      attachmentUrl,
-    };
+  // const onSubmit = async (event) => {
+  //   event.preventDefault();
+  //   let attachmentUrl = "";
+  //   if (attachment !== "") {
+  //     const fileRef = ref(storage, `${userObj.uid}/${v4()}`);
+  //     const uploadFile = await uploadString(fileRef, attachment, "data_url");
+  //     console.log(uploadFile);
+  //     attachmentUrl = await getDownloadURL(uploadFile.ref);
+  //     console.log(attachmentUrl);
+  //   }
+  //   const tweetPosting = {
+  //     text: tweet,
+  //     createdAt: Date.now(),
+  //     creatorId: userObj.uid,
+  //     attachmentUrl,
+  //   };
 
-    await addDoc(collection(db, "tweets"), tweetPosting);
-    setTweet("");
-    onClearAttachment();
-  };
+  //   await addDoc(collection(db, "tweets"), tweetPosting);
+  //   setTweet("");
+  //   onClearAttachment();
+  // };
 
-  const onChange = (event) => {
-    setTweet(event.target.value);
-  };
+  // const onChange = (event) => {
+  //   setTweet(event.target.value);
+  // };
 
-  const fileOnChange = (e) => {
-    const reader = new FileReader();
-    reader.onloadend = (finishedEvent) => {
-      const {
-        currentTarget: { result },
-      } = finishedEvent;
-      setAttachment(result);
-    };
-    reader.readAsDataURL(e.target.files[0]);
-  };
+  // const fileOnChange = (e) => {
+  //   const reader = new FileReader();
+  //   reader.onloadend = (finishedEvent) => {
+  //     const {
+  //       currentTarget: { result },
+  //     } = finishedEvent;
+  //     setAttachment(result);
+  //   };
+  //   reader.readAsDataURL(e.target.files[0]);
+  // };
 
-  const onClearAttachment = () => {
-    fileInput.current.value = "";
-    setAttachment("");
-  };
+  // const onClearAttachment = () => {
+  //   fileInput.current.value = "";
+  //   setAttachment("");
+  // };
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
+      {/* <form onSubmit={onSubmit}>
         <input
           value={tweet}
           type="text"
@@ -94,7 +95,8 @@ const Home = ({ userObj }) => {
             <button onClick={onClearAttachment}>Clear</button>
           </div>
         )}
-      </form>
+      </form> */}
+      <TweetFactory userObj={userObj} />
       <div>
         {tweets.map((tweet) => {
           return (
