@@ -8,6 +8,12 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState(null);
 
+  const refreshUser = () => {
+    const user = auth.currentUser;
+    //currentUser덩치가 너무 커서 특정지어줄 필요가 있다.
+    setUserObj({ displayName: user.displayName });
+  };
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -23,7 +29,11 @@ function App() {
   return (
     <>
       {init ? (
-        <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} />
+        <AppRouter
+          isLoggedIn={isLoggedIn}
+          userObj={userObj}
+          refreshUser={refreshUser}
+        />
       ) : (
         "loading..."
       )}
