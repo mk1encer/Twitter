@@ -30,74 +30,10 @@ const Home = ({ userObj }) => {
     });
   }, []);
 
-  // const onSubmit = async (event) => {
-  //   event.preventDefault();
-  //   let attachmentUrl = "";
-  //   if (attachment !== "") {
-  //     const fileRef = ref(storage, `${userObj.uid}/${v4()}`);
-  //     const uploadFile = await uploadString(fileRef, attachment, "data_url");
-  //     console.log(uploadFile);
-  //     attachmentUrl = await getDownloadURL(uploadFile.ref);
-  //     console.log(attachmentUrl);
-  //   }
-  //   const tweetPosting = {
-  //     text: tweet,
-  //     createdAt: Date.now(),
-  //     creatorId: userObj.uid,
-  //     attachmentUrl,
-  //   };
-
-  //   await addDoc(collection(db, "tweets"), tweetPosting);
-  //   setTweet("");
-  //   onClearAttachment();
-  // };
-
-  // const onChange = (event) => {
-  //   setTweet(event.target.value);
-  // };
-
-  // const fileOnChange = (e) => {
-  //   const reader = new FileReader();
-  //   reader.onloadend = (finishedEvent) => {
-  //     const {
-  //       currentTarget: { result },
-  //     } = finishedEvent;
-  //     setAttachment(result);
-  //   };
-  //   reader.readAsDataURL(e.target.files[0]);
-  // };
-
-  // const onClearAttachment = () => {
-  //   fileInput.current.value = "";
-  //   setAttachment("");
-  // };
-
   return (
-    <div>
-      {/* <form onSubmit={onSubmit}>
-        <input
-          value={tweet}
-          type="text"
-          placeholder="what's going on?"
-          maxLength={140}
-          onChange={onChange}
-        />
-        <input
-          type="file"
-          accept="image/*"
-          onChange={fileOnChange}
-          ref={fileInput}
-        />
-        <input type="submit" value="twt" />
-        {attachment && (
-          <div>
-            <img src={attachment} width="50px" height="50px" />
-            <button onClick={onClearAttachment}>Clear</button>
-          </div>
-        )}
-      </form> */}
+    <div className="container">
       <TweetFactory userObj={userObj} />
-      <div>
+      <div style={{ marginTop: 30 }}>
         {tweets.map((tweet) => {
           return (
             <Tweet
