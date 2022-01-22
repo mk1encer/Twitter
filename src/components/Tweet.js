@@ -58,7 +58,7 @@ const Tweet = ({ tweetObj, owned }) => {
           </span>
         </>
       ) : (
-        <div key={tweetObj.id} style={{ backgroundColor: "lightgrey" }}>
+        <div key={tweetObj.id}>
           <h4>{tweetObj.text}</h4>
           {tweetObj.attachmentUrl && <img src={tweetObj.attachmentUrl} />}
           {owned && (

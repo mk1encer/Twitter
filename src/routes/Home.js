@@ -9,15 +9,10 @@ import {
   orderBy,
 } from "firebase/firestore";
 import Tweet from "../components/Tweet";
-import { getDownloadURL, ref, uploadString } from "firebase/storage";
-import { v4 } from "uuid";
 import TweetFactory from "../components/TweetFactory";
 
 const Home = ({ userObj }) => {
-  const [tweet, setTweet] = useState("");
   const [tweets, setTweets] = useState([]);
-  const [attachment, setAttachment] = useState("");
-  const fileInput = useRef();
 
   useEffect(() => {
     const q = query(collection(db, "tweets"), orderBy("createdAt"));
